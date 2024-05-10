@@ -1,0 +1,120 @@
+
+
+1. Spring framework:
+
+    - Spring là 1 framework mã nguồn mở dùng để phát triển các ứng dụng java.
+    - Spring dc xây dựng dựa trên 2 nguyên tắc chính là dependency injection (DI) và aspect oriented programming (AOP).
+    - Giúp các lập trình viên phát triển các ứng dụng dựa trên mô hình POJO dễ dàng và hiệu quả hơn.
+    - Spring chia thành nhiều module khác nhau. Kiến trúc tổng thể của spring gồm các tầng:
+        + Test: hỗ trợ test (JUnit, ...)
+        + Spring core container: bao gồm các module của spring core, beans, context và EL-expression language.
+            Spring core cung cấp các tính năng chính là: IOC và DI.
+            Spring context hỗ trợ và sử dụng cho đa ngôn ngữ.
+            EL hỗ trợ việc setting và getting giá trị, các method. Từ đó có thể cải tiến cho phép truy cập collections,
+            index hay các toán tử logic…
+        + AOP, Aspect and Instrumentation: giúp lập trình AOP và hỗ trợ tích hợp.
+        + Data access/integration: gồm có JDBC, ORM, OXM, JMS và module Transaction giúp giao tiếp và làm việc với database
+        + Web: spring MVC: hỗ trợ tạo ứng dụng web nhanh và hiệu quả
+
+
+2. Spring MVC:
+
+    Là mô hình thiết kế phần mềm dựa trên spring framework, giúp phát triển các dự án web dựa theo cấu trúc MVC: Model-View-Controller.
+    - Model: chứa thông tin dữ liệu, tương tác với database, bao gồm các file: POJO, Service, DAO. Giúp truy cập database và xử lý logic.
+    - View: Nơi hiểu thị nội dung và dùng để tương tác trực tiếp với ng dùng. Thường sử dụng các template engine.
+    - Controller: nơi tiếp nhận request từ người dùng, xây dựng dữ liệu cho view và chọn view để trả về cho ng dùng.
+
+3. Spring Boot:
+
+    Spring Boot là 1 framework thuộc spring framework, giúp tự động hóa nhiều công đoạn trong quá trình phát triển ứng dụng như cấu
+    hình, cài đặt ban đầu, triển khai và quản lý.
+    Các đặc điểm nổi bật:
+    - Tự động cấu hình: Spring Boot cho phép tự động cấu hình ứng dụng dựa trên thư viện và các tùy chọn cấu hình mặc định,
+     giúp giảm thiểu khối lượng công việc liên quan đến cấu hình thủ công.
+    - Tích hợp sẵn: Spring Boot tích hợp sẵn các thư viện và công nghệ phổ biến như Spring Framework,
+     Hibernate, Thymeleaf, và nhiều thứ khác, giúp dễ dàng xây dựng ứng dụng mà không cần cài đặt nhiều thứ bổ sung.
+    - Tạo ứng dụng độc lập: Spring Boot cho phép tạo ra các ứng dụng chạy độc lập mà không cần phải triển khai vào các
+     máy chủ ứng dụng bên ngoài như Tomcat hay Jetty. Ứng dụng có thể được đóng gói thành các file JAR hoặc WAR.
+    - Quản lý phụ thuộc: Spring Boot sử dụng công cụ quản lý phụ thuộc như Maven hoặc Gradle để quản lý các thư viện
+     và phiên bản phụ thuộc.
+    - Hỗ trợ viết mã ít và cấu trúc tốt: Spring Boot giúp viết ít mã hơn và tập trung vào logic ứng dụng hơn là việc cấu hình.
+     Nó cũng thúc đẩy việc tuân theo các nguyên tắc cấu trúc tốt để dễ dàng duy trì ứng dụng.
+    - Hỗ trợ cài đặt và triển khai: Spring Boot cung cấp các công cụ hỗ trợ cài đặt và triển khai ứng dụng, bao gồm cả việc tạo
+    file thực thi (executable) cho ứng dụng.
+
+4. DI và IoC:
+
+    IoC (inversion of control): là 1 nguyên tắc thiết kế phần mềm tuân thủ theo nguyên lý D trong SOLID (Dependency Inversion). IoC
+    giúp quản lý, điều phối các dependencies trong hệ thống.
+    DI (Dependency Injection): là 1 design pattern triển khai IoC
+        + Các module giao tiếp với nhau thông qua interface. Module cấp thấp sẽ implement interface, module cấp cao sẽ gọi module cấp
+        thấp thông qua interface.
+        + Việc khởi tạo các module cấp thấp sẽ do DI Container (IoC Container) thực hiện.
+        + Có 3 dạng DI: constructor, setter, interface injection.
+    -> giảm sự phụ thuộc giữa các module, dễ dàng thay đổi, bảo trì, triển khai.
+
+5. Spring bean:
+
+    Bean là các module của chương trình, dc khởi tạo và quản lý bởi IoC Container.
+    Các bean chính trong Spring:
+        - @Component: đánh dấu 1 class là 1 thành phần (component) dc quản lý bởi IoC
+        - @Repository: đại diện cho lớp Data Access Object
+        - @Service: các lớp triển khai business logic
+        - @Controller: các lớp controller trong hệ thống
+    Bean scope:
+        - Singleton: duy nhất 1 instance của bean đó dc khởi tạo cho mỗi container.
+        - Prototype: dc tạo ra cho mỗi lần dc yêu cầu.
+        - Request: sử dụng cho web, mỗi Http request sẽ tạo ra 1 đối tượng.
+        - Session: mỗi session sẽ tạo ra 1 phiên bản mới của bean.
+        - Application: Tồn tại trong suốt vòng đời của ứng dụng web.
+    Bean life circle:
+        1. Khi IoC Container tìm thấy một Bean cần quản lý, nó sẽ khởi tạo bằng Constructor.
+        2. Dependencies sẽ được inject vào Bean thông qua Setter và thực hiện các quá trình cài đặt khác.
+        3. Hàm được đánh dấu @PostConstruct sẽ được gọi.
+        4. Bean đã sẵn sàng để hoạt động.
+        5. Nếu IoC Container không quản lý Bean nữa hoặc bị shutdown, hàm @PreDestroy sẽ được gọi.
+        6. Bean được xóa.
+
+6. Khái niệm cơ bản về request, response, httpMethod, JSON, API:
+
+    Http request, response: là 1 yêu cầu của phía client gửi về cho server, phía server sẽ xử lý yêu cầu từ client và gửi trả về response.
+    Thông tin của 1 request bao gồm:
+    - HttpMethod.
+    - URL.
+    - HttpVersion
+    - Header: host, accept(data type), content-type, cookie
+    - RequestBody.
+    Thông tin của 1 response bao gồm:
+    - Http version và status.
+    - Header: date, set-cookie, expires
+    - ResponseBody
+
+    Các HttpMethod:
+    - GET: dc sử dụng để nhận dữ liệu từ phía server, có thể cache, bookmark, lưu trong lịch sử trình duyệt.
+    - POST: gửi dữ liệu mới cho server, ko thể cache, bookmark, lưu trong lịch sử trình duyệt, ko bị giới hạn độ dài.
+    - PUT: gửi dữ liệu để ghi đè 1 đối tượng dc gửi lên từ trc từ server.
+    - PATCH: thay đổi trường dc yêu cầu từ đối tượng dc gửi lên từ server.
+    - DELETE: gửi yêu cầu xóa đối tượng dc chỉ định cho server.
+    - CONNECT: Thiết lập một kết nối tới server theo URI
+    - OPTIONS: Mô tả các tùy chọn giao tiếp cho resource
+    - TRACE: Thực hiện một bài test loop - back theo đường dẫn đến resource
+
+    JSON:
+    - JSON là một định dạng dữ liệu phổ biến được sử dụng để truyền tải dữ liệu giữa client và server.
+    - Dữ liệu JSON được biểu diễn dưới dạng các cặp key-value.
+    - JSON có thể chứa các kiểu dữ liệu như chuỗi (string), số (number), boolean, mảng (array), và đối tượng (object).
+
+    API (application programming interface):
+    Là 1 phương thức trung gian cho phép các ứng dụng giao tiếp với nhau
+
+7. Maven:
+    - Là 1 công cụ quản lý version, các dependencies và thiết lập tự động 1 dự án phần mềm.
+    - Maven dùng khái niệm Project Object Model (POM) để mô tả việc build project, các thành phần phụ thuộc và các module.
+    Nó định nghĩa trước các target cho việc khai báo task, trình biên dịch, đóng gói và thứ tự hoạt động để mọi việc diến ra tốt nhất.
+    - Trong mỗi project Maven tạo ra một file .pom, trong file này định nghĩa ra những task như task khi chạy test,
+    task khi build và khi chạy Maven sẽ dựa vào những định nghĩa này để thao tác với project.
+
+* AOP: lập trình khía cạnh, là 1 kỹ thuật lập trình nhằm phân tách chương trình thành các module riêng rẽ, phân biệt, không phụ thuộc
+và nhau.
+* Dependency Inversion: Các module cấp cao ko nên phụ thuộc vào module cấp thấp, cả 2 nên phụ thuộc vào abstraction, và abstraction ko
+nên phụ thuộc vào chi tiết.
