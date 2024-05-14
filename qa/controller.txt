@@ -1,0 +1,52 @@
+
+
+1. Controller và RestController:
+    - Controller là annotation dc extend từ annotation Component đánh dấu lớp đó là 1 bean dc quản lý bởi ioc container và thuộc tầng
+     controller.
+    - RestController extend từ Controller kết hợp với Annotation ResponseBody khai báo mặc định các method trong lớp đó trả về định
+    dạng application/json.
+    - RestController chuyên dc sử dụng để phát triển REST API với dữ liệu trả về thường là dạng json.
+    - Controller thường dc sử dụng để phát triển các ứng dụng web serverside rendering trả về view.
+
+2. Routing:
+    Luồng xử lý:
+    - Client gửi request tới server.
+    - DispatcherServlet tiếp nhận request của người dùng, phân tích và gửi tới đúng controller method phù hơp.
+    - Controller method sử lý yêu cầu (business) từ người dùng.
+    - Dữ liệu dc convert lại theo kiểu trả về (response type) yêu cầu của client và gửi về cho client.
+
+    - Controller method dc định nghĩa với các tham số thông qua các annotations:
+        + Để khai báo đường dẫn và HttpMethod, có thể sử dụng các annotation như: GetMapping, PostMapping ... là tên method kết hợp với
+        mapping với địa chỉ dc khai báo bên trong. Ngoài ra có thể sử dụng @RequestMapping.
+            @GetMapping("/students");
+            @RequestMapping(value = "/students", method = RequestMethod.GET);
+        + Để đăng ký request params nào có thể nhận dc, sử dụng annotation RequestParam cùng với biến trong method parameters
+            @GetMapping("/students")
+            public String getStudents(@RequestParam(value = "age") int age){...}
+        Ngoài ra có thể setup các yêu cầu khác cho request để dc chấp nhận.
+        + Tương tự request params, thêm các anno @PathVariable, @RequestBody, @Header cùng điều kiện cần thiết để nhận dữ liệu tương ứng.
+             @GetMapping("/students/{id}")
+             public String getStudents(
+                    @PathVariable(value = "id") int id,
+                    @RequestBody @Valid StudentDto dto,
+                    @RequestHeader("Page", required = false) int page
+             ){...}
+        + Sử dụng @HttpExchange để phát triển các lớp trừu tượng cho controller
+             @HttpExchange("/students")
+             interface Students {
+
+             	@GetExchange("/{id}")
+             	Student getStudents(@PathVariable Long id);
+
+             	@PostExchange
+             	void add(@RequestBody Student student);
+             }
+
+3. Sử dụng dependency Validation cùng các annotations của nó để validate dữ liệu request.
+    Các annotation phổ biến:
+    @NotNull: check null.
+    @NotBlank: check String (báo lỗi kể cả null lẫn empty String)
+    @NotEmpty: check chuỗi có empty ko.
+    @Valid: kiểm tra giá trị đầu vào trc khi thực thi method trong controller.
+
+4. Handle exception: sử dụng annotation ExceptionHandler bắt lỗi trong quá trình thực thi và trả về response theo format của mình.
