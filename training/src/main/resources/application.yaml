@@ -1,0 +1,32 @@
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: training
+  # H2 config
+  h2:
+    datasource:
+      url: jdbc:h2:mem:testdb
+      driverClassName: org.h2.Driver
+      username: sa
+      password:
+    jpa:
+      database-platform: org.hibernate.dialect.H2Dialect
+      properties:
+        hibernate:
+          format-sql: true
+          show-sql: true
+    console:
+      enabled: true
+  # postgresql config
+  postgres:
+    datasource:
+      url: jdbc:postgresql://localhost:5432/training_tasc
+      username: ${PG_USERNAME}
+      password: ${PG_PASSWORD}
+    hibernate:
+      show-sql: true
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      ddl-auto: create-drop

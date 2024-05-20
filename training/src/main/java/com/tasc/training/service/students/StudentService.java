@@ -1,6 +1,6 @@
 package com.tasc.training.service.students;
 
-import com.tasc.training.model.Student;
+import com.tasc.training.model.student.Student;
 
 import java.util.List;
 

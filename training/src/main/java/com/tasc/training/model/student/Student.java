@@ -1,4 +1,4 @@
-package com.tasc.training.model;
+package com.tasc.training.model.student;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

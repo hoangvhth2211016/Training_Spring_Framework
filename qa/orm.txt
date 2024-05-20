@@ -1,0 +1,63 @@
+
+
+1. ORM:
+    - ORM (Object Relational Mapping) là 1 kỹ thuật cho phép ánh xạ CSDL sang các đối tượng trong ngôn ngữ lập trình hướng đối tượng.
+    - Ưu điểm:
+        + Cho phép lập trình viên tập trung vào việc lập trình hướng đối tượng.
+	+ Chuyển đổi sang ngôn ngữ lập trình -> dễ dàng làm việc với nhiều loại db khác nhau.	
+	+ Giảm số lượng code, dễ dàng trong việc tái sử dụng code.
+    	+ Tăng tính bảo mật
+	+ Tăng tốc độ phát triển và giảm thiểu chi phí cho dự án.
+    - Nhược điểm:
+	+ Performance kém hơn so với native sql.
+	+ Khó thực thi các câu truy vấn đòi hỏi độ phức tạp cao.
+    - Cơ chế hoạt động:
+	+ ORM thực hiện mapping giữa các bảng trong DB (DB schema) thành các đối tượng (object model) trong ngôn ngữ lập trình.
+	+ Chuyển đổi từ code logic trong ngôn ngữ lập trình sang các câu truy vấn trong db.
+    - So sánh Performance của JDBC và ORM:
+	+ JDBC có hiệu suất cao hơn do thực hiện trực tiếp câu truy vấn và tối ưu hóa truy vấn trong sql.
+
+
+2. JPA (Java Persistent API) là 1 đặc tả java (các interface) cho việc ánh xạ các đối tượng
+với DB và dc ứng dụng bởi các ORM framework như Hibernate.
+    Spring Data JPA là 1 phần của Spring framework cung cấp 1 triển khai của JPA và JPA là 1 chuẩn kỹ thuật cho ORM -> Spring Data là 1
+triển khai của ORM.
+   Các loại Cascade:
+	All: bao gồm tất cả các loại cascade
+	Persist: tự động lưu các đối tượng liên quan, khi đối tượng chính dc lưu.
+	Merge: tự động cập nhật các đối tượng liên quan, khi đối tượng chính dc cập nhật.
+	Remove: tự động xóa các đối tượng liên quan, khi đối tượng chính bị xóa.
+	Refresh: tự động làm mới đối tượng liên quan, khi đối tượng chính dc làm mới.
+	Detach: tự động tách đối tượng liên quan, khi đối chính dc tách khỏi persistent context hiện tại.
+
+
+3. Fetch type:
+    Có 2 loại Fetch type:
+    - Lazy: ko lấy các đối tượng nếu ko dc gọi tới.
+        + Ưu điểm: tiết kiệm thời gian, bộ nhớ
+        + Nhược điểm: lỗi LazyInitializationException, n+1 issue.
+    - eager: lấy cả các đối tượng liên quan kể cả khi ko gọi tới.
+        + Ưu điểm: xử lý đơn giản, dễ hiểu.
+        + Nhược điểm: tốn tài nguyên, thời gian.
+    - với ManyToOne và OneToOne thì mặc đinh là eager.
+    - với ManyToMany và OneToMany thi mặc định là lazy.
+
+
+4. Native Query:
+    - Sử dụng JPQL:
+    @Query("select u from User u")
+    Collection<User> findAll();
+    - Sử dụng NativeQuery
+    @Query(value = "SELECT * FROM User WHERE id = :id", nativeQuery = true)
+    User findById(@Param("id") Long id);
+    - Để thực hiện thêm, sửa, xóa, thêm @modifying trên method.
+    - Với nativeQuery cần phải thêm countQuery để phân trang.
+    countQuery = "SELECT count(id) from User u where u.id = :id"
+
+
+5. Specification:
+    - Là 1 interface trong Spring Data JPA, cho phép xây dựng các câu truy vấn bằng cách kết hợp các tiêu chí tìm kiếm khác nhau.
+    - Các specification có thể tái sử dụng và kết hợp để tạo ra các câu query phức tạp, dynamic.
+
+
+

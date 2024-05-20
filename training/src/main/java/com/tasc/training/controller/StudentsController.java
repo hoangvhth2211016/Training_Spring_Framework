@@ -1,7 +1,7 @@
 package com.tasc.training.controller;
 
 
-import com.tasc.training.model.Student;
+import com.tasc.training.model.student.Student;
 import com.tasc.training.service.students.StudentService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +42,6 @@ public class StudentsController {
     public String delete(@PathVariable int id){
         studentService.delete(id);
         return "student deleted";
-
     }
     
     @GetMapping("/search")

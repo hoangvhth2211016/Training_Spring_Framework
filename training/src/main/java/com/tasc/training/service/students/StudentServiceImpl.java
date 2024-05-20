@@ -2,12 +2,9 @@ package com.tasc.training.service.students;
 
 import com.tasc.training.exception.AlreadyExistException;
 import com.tasc.training.exception.NotFoundException;
-import com.tasc.training.model.Student;
-import org.springframework.http.HttpStatus;
+import com.tasc.training.model.student.Student;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
